@@ -53,6 +53,12 @@ def triangle(start, end):
 
     end_fill()
 
+def increase_width(jump):
+    "Increases the width of the trace"
+    state['width'] += jump
+
+def decrease_width(
+
 def tap(x, y):
     "Store starting point or draw shape."
     start = state['start']
@@ -69,7 +75,7 @@ def store(key, value):
     "Store value in state at key."
     state[key] = value
 
-state = {'start': None, 'shape': line}
+state = {'start': None, 'shape': line, width: 1}
 setup(420, 420, 370, 0)
 onscreenclick(tap)
 listen()
