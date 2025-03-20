@@ -3,6 +3,7 @@ from freegames import vector
 
 def line(start, end):
     "Draw line from start to end."
+    width(state['width'])
     up()
     goto(start.x, start.y)
     down()
@@ -10,6 +11,7 @@ def line(start, end):
 
 def square(start, end):
     "Draw square from start to end."
+    width(state['width'])
     up()
     goto(start.x, start.y)
     down()
@@ -23,41 +25,47 @@ def square(start, end):
 
 def circle(start, end):
     "Draw circle from start to end."
+    width(state['width'])
     pass  # TODO
 
 def rectangle(start, end):
     "Draw rectangle from start to end."
+    width(state['width'])
     up()
     goto(start.x, start.y)
     down()
     begin_fill()
 
     for count in range(2):
-        forward(end.x - start.x)
+        forward(end.x - start.y)
         left(90)
-        forward(end.y - start.y)
+        forward(end.y, start.y)
         left(90)
-
+    
     end_fill()
 
 def triangle(start, end):
     "Draw triangle from start to end."
+    width(state['width'])
     up()
     goto(start.x, start.y)
     down()
     begin_fill()
 
-    for count in range(3):
-        forward(((end.x - start.x)**2+(end.y - start.y)**2)**0.5)
+    for count in range(3): 
+        forwward(((end.x - start.x)**2+(end.y - start.y)**2)**0.5)
         left(120)
 
     end_fill()
 
-def increase_width(jump):
+def increase_width():
     "Increases the width of the trace"
-    state['width'] += jump
+    state['width'] += 1
 
-def decrease_width(
+def decrease_width():
+    "Decreases the widht of the trace"
+    if state['width'] > 0: 
+        state['width'] -= 1
 
 def tap(x, y):
     "Store starting point or draw shape."
@@ -75,7 +83,7 @@ def store(key, value):
     "Store value in state at key."
     state[key] = value
 
-state = {'start': None, 'shape': line, width: 1}
+state = {'start': None, 'shape': line, 'width': 1}
 setup(420, 420, 370, 0)
 onscreenclick(tap)
 listen()
@@ -90,4 +98,6 @@ onkey(lambda: store('shape', square), 's')
 onkey(lambda: store('shape', circle), 'c')
 onkey(lambda: store('shape', rectangle), 'r')
 onkey(lambda: store('shape', triangle), 't')
+onkey(increase_width, 'Up')
+onkey(decrease_width, 'Down')
 done()
