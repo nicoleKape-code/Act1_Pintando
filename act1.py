@@ -26,7 +26,15 @@ def square(start, end):
 def circle(start, end):
     "Draw circle from start to end."
     width(state['width'])
-    pass  # TODO
+    up()
+    goto(start.x, start.y - ((end.x - start.x) / 2))  # Centrar el círculo
+    down()
+    begin_fill()
+    
+    radius = ((end.x - start.x) ** 2 + (end.y - start.y) ** 2) ** 0.5 / 2
+    turtle.circle(radius)  # Dibuja un círculo con el radio calculado
+    
+    end_fill()
 
 def rectangle(start, end):
     "Draw rectangle from start to end."
@@ -93,6 +101,7 @@ onkey(lambda: color('white'), 'W')
 onkey(lambda: color('green'), 'G')
 onkey(lambda: color('blue'), 'B')
 onkey(lambda: color('red'), 'R')
+onkey(lambda: color('yellow'), 'Y')  # Nuevo color añadido (amarillo)
 onkey(lambda: store('shape', line), 'l')
 onkey(lambda: store('shape', square), 's')
 onkey(lambda: store('shape', circle), 'c')
