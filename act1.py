@@ -71,7 +71,7 @@ def increase_width():
     state['width'] += 1
 
 def decrease_width():
-    "Decreases the widht of the trace"
+    "Decreases the width of the trace"
     if state['width'] > 0: 
         state['width'] -= 1
 
